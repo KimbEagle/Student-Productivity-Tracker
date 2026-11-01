@@ -1,6 +1,6 @@
 # Student Productivity Tracker
 
-A program that allows users to enter information about assignments and due dates, and organizes them and gives information about productivity in completing the assignments.
+A program that allows users to enter information about assignments and due dates, and organizes them and gives information about productivity.
 
 ## The Problem
 
@@ -29,7 +29,7 @@ For students, it becomes difficult to keep track of assignments and time managem
 - [ ] Graphical user interface
 - [ ] Displaying productivity using graphs and charts
 - [ ] Filtering assignments by course or completion status
-- [ ] Calculating productivity based on statistics
+- [ ] Calculating extra productivity statistics
 - [ ] Weekly or class-specific productivity trends
 
 ## Author
