@@ -24,6 +24,29 @@ For students, it becomes difficult to keep track of assignments and time managem
 - **Libraries:** ArrayList, LocalDate, IO, HashMap
 - **External tools:** No external tools will be used.
 
+## Setup
+
+### Prerequisites
+- Install Git.
+- Install the Java Development Kit (JDK).
+
+### Download the Project
+```bash
+git clone https://github.com/KimbEagle/Student-Productivity-Tracker.git
+cd Student-Productivity-Tracker
+```
+
+The program is still under development and files have not been created yet. Instructions will be uploaded once the main Java class is implemented.
+
+## Usage
+
+Once implemented, the program will display a main menu with options to do the following:
+- Add assignments.
+- View assignments.
+- Mark assignments as completed.
+- View the assignment completion rate.
+- Save and exit.
+  
 ## Roadmap
 
 - [ ] Graphical user interface
