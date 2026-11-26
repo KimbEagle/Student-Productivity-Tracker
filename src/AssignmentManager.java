@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class AssignmentManager {
 
-    private ArrayList<Assignment> assignments = new ArrayList<>();
+    private final ArrayList<Assignment> assignments = new ArrayList<>();
 
     public void addAssignment(Assignment assignment) {
         assignments.add(assignment);
