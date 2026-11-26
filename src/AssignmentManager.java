@@ -31,5 +31,23 @@ public class AssignmentManager {
         System.out.println("\nTotal assignments: " + assignments.size());
     }
 
+    public void completeAssignment(int assignmentNumber) {
+        if (assignmentNumber < 1 || assignmentNumber > assignments.size()) {
+            System.out.println("Invalid assignment number.");
+            return;
+        }
+
+        // Numbers for users start at 1, but ArrayList starts at 0 so we subtract one to get the correct index.
+        Assignment assignment = assignments.get(assignmentNumber - 1);
+
+        if (assignment.isCompleted()) {
+            System.out.println("This assignment is already completed.");
+            return;
+        }
+
+        assignment.markComplete();
+        System.out.println("Assignment marked as completed successfully!");
+    }
+
 }
 

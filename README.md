@@ -69,9 +69,9 @@ can select an option by entering its corresponding number.
 - Validate assignment information and handle invalid input.
 - View all assignments, deadlines, and completion statuses.
 - Exit the program.
+- Mark assignments as completed.
 
 ### In Development
-- Mark assignments as completed.
 - Record actual time spent on assignments.
 - Save and load assignment data using CSV files.
 - Calculate and display assignment completion rates.
@@ -89,7 +89,7 @@ not persist after the program exits.
 - [x] Implement assignment storage using ArrayList
 - [x] Implement assignment creation with input validation
 - [x] Display assignments and their due dates
-- [ ] Allow users to mark assignments as completed
+- [x] Allow users to mark assignments as completed
 - [ ] Allow users to record actual time spent on assignments
 - [ ] Save assignment data to CSV file
 - [ ] Load assignments from CSV file on program start
