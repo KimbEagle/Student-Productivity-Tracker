@@ -3,10 +3,10 @@ import java.time.LocalDate;
 
 public class Assignment {
 
-    private String name;
-    private String course;
-    private LocalDate dueDate;
-    private double estimatedHours;
+    private final String name;
+    private final String course;
+    private final LocalDate dueDate;
+    private final double estimatedHours;
     private double actualHours;
     private boolean completed;
 
