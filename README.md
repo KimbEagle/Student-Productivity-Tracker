@@ -26,9 +26,13 @@ For students, it becomes difficult to keep track of assignments and time managem
 
 ## Setup
 
+
 ### Prerequisites
+
 - Install Git.
-- Install the Java Development Kit (JDK).
+- Install the Java Development Kit (JDK 26).
+- A terminal or Java IDE such as IntelliJ IDEA.
+
 
 ### Download the Project
 ```bash
@@ -36,24 +40,67 @@ git clone https://github.com/KimbEagle/Student-Productivity-Tracker.git
 cd Student-Productivity-Tracker
 ```
 
-The program is still under development and files have not been created yet. Instructions will be uploaded once the main Java class is implemented.
+
+### Compile and Run
+
+From the project's directory, compile the Java files:
+
+```bash
+javac -d out src/*.java
+```
+
+Run the program:
+
+```bash
+java -cp out Main
+```
+
+The program will display an interactive menu in the terminal.
+
+
 
 ## Usage
 
-Once implemented, the program will display a main menu with options to do the following:
-- Add assignments.
-- View assignments.
+The program displays an interactive main menu where users
+can select an option by entering its corresponding number.
+
+### Currently Implemented
+- Add assignments with a name, course, due date, and estimated study time.
+- Validate assignment information and handle invalid input.
+- View all assignments, deadlines, and completion statuses.
+- Exit the program.
+
+### In Development
 - Mark assignments as completed.
-- View the assignment completion rate.
-- Save and exit.
-  
+- Record actual time spent on assignments.
+- Save and load assignment data using CSV files.
+- Calculate and display assignment completion rates.
+
+Assignment data is currently stored in memory and will
+not persist after the program exits.
+
+
+
 ## Roadmap
 
-- [ ] Graphical user interface
-- [ ] Displaying productivity using graphs and charts
-- [ ] Filtering assignments by course or completion status
-- [ ] Calculating extra productivity statistics
-- [ ] Weekly or class-specific productivity trends
+### MVP Features
+- [x] Set up GitHub repository and Java project
+- [x] Create Assignment class with assignment attributes
+- [x] Implement assignment storage using ArrayList
+- [x] Implement assignment creation with input validation
+- [x] Display assignments and their due dates
+- [ ] Allow users to mark assignments as completed
+- [ ] Allow users to record actual time spent on assignments
+- [ ] Save assignment data to CSV file
+- [ ] Load assignments from CSV file on program start
+
+### Schedule Features
+- [ ] Calculate and display basic productivity statistics
+- [ ] Filter assignments by course or completion status
+- [ ] Display weekly or class-specific productivity trends
+- [ ] Display productivity using graphs and charts
+- [ ] Develop a graphical user ok interface
+
 
 ## Author
 

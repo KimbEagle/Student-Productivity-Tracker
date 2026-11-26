@@ -64,7 +64,7 @@ public class Main {
 
 
                 case "2":
-                    System.out.println("View Assignments selected");
+                    manager.viewAssignments();
                     break;
 
                 case "3":
