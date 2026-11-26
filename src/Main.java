@@ -67,9 +67,26 @@ public class Main {
                     manager.viewAssignments();
                     break;
 
+
                 case "3":
-                    System.out.println("Mark Assignment Complete selected");
+                    if (manager.getAssignmentCount() == 0) {
+                        System.out.println("No assignments are available to complete.");
+                        break;
+                    }
+
+                    manager.viewAssignments();
+
+                    System.out.print("\nEnter assignment number: ");
+
+                    try {
+                        int assignmentNumber = Integer.parseInt(scanner.nextLine());
+                        manager.completeAssignment(assignmentNumber);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Please enter a valid whole number.");
+                    }
+
                     break;
+
 
                 case "4":
                     System.out.println("View Productivity selected");
