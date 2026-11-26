@@ -49,5 +49,29 @@ public class AssignmentManager {
         System.out.println("Assignment marked as completed successfully!");
     }
 
+    public void recordStudyHours(int assignmentNumber, double hours) {
+        if (assignmentNumber < 1 || assignmentNumber > assignments.size()) {
+            System.out.println("Invalid assignment number.");
+            return;
+        }
+
+        if (!Double.isFinite(hours) || hours <= 0) {
+            System.out.println("Study hours must be a positive number.");
+            return;
+        }
+
+        Assignment assignment = assignments.get(assignmentNumber - 1);
+
+        if (!Double.isFinite(assignment.getActualHours() + hours)) {
+            System.out.println("Total study hours are too large.");
+            return;
+        }
+
+        assignment.addActualHours(hours);
+        System.out.println("Study hours recorded successfully!");
+        System.out.println("Total actual hours: " + assignment.getActualHours());
+    }
+
+
 }
 

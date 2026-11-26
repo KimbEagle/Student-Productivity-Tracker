@@ -17,7 +17,7 @@ public class Main {
             System.out.println("1. Add Assignment");
             System.out.println("2. View Assignments");
             System.out.println("3. Mark Assignment Complete");
-            System.out.println("4. View Productivity");
+            System.out.println("4. Record Study Hours");
             System.out.println("5. Save and Exit");
 
             System.out.print("Enter your choice: ");
@@ -88,9 +88,35 @@ public class Main {
                     break;
 
 
+
                 case "4":
-                    System.out.println("View Productivity selected");
+                    if (manager.getAssignmentCount() == 0) {
+                        System.out.println("No assignments are available to record hours for.");
+                        break;
+                    }
+
+                    manager.viewAssignments();
+
+                    try {
+                        System.out.print("\nEnter assignment number: ");
+                        int assignmentNumber = Integer.parseInt(scanner.nextLine());
+
+                        if (assignmentNumber < 1 ||
+                                assignmentNumber > manager.getAssignmentCount()) {
+                            System.out.println("Invalid assignment number.");
+                            break;
+                        }
+
+                        System.out.print("Enter hours spent studying: ");
+                        double hours = Double.parseDouble(scanner.nextLine());
+
+                        manager.recordStudyHours(assignmentNumber, hours);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Please enter a valid number.");
+                    }
+
                     break;
+
 
                 case "5":
                     System.out.println("See you next time!");

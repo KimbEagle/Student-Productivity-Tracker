@@ -8,21 +8,23 @@ For students, it becomes difficult to keep track of assignments and time managem
 
 ## How It Works
 
-- Users navigate a main menu with options to add assignments, view assignments, mark assignments complete, view productivity, or save and exit.
-- When adding an assignment, users enter its name, course, due date, and expected completion time.
-- When viewing assignments, users see all entered assignments and their completion status.
+- Users navigate a main menu with options to add assignments, view assignments, mark assignments complete, record study hours, or exit.
+- When adding an assignment, users enter its name, course, due date, and estimated study time.
+- When viewing assignments, users see all entered assignments, deadlines, estimated hours, actual hours, and completion statuses.
 - Users can mark unfinished assignments as completed.
-- The productivity option displays the assignment completion rate: the percentage of all assignments marked complete.
+- Users can record actual study hours across multiple study sessions for each assignment.
 - After each action, users return to the main menu to select another option.
-- Selecting “Save and Exit” saves assignment information and closes the program.
+- Assignment data is currently stored in memory. CSV storage and productivity statistics are planned features.
 
 ![System diagram](docs/System-Diagram.png)
 
 ## Tech Stack
 
-- **Language:** Java
-- **Libraries:** ArrayList, LocalDate, IO, HashMap
-- **External tools:** No external tools will be used.
+- **Language:** Java 26
+- **Libraries:** ArrayList, LocalDate, Scanner
+- **Storage:** In-memory ArrayList (CSV file storage planned)
+- **Development tools:** IntelliJ IDEA, Git, GitHub
+- **External dependencies:** None
 
 ## Setup
 
@@ -70,9 +72,9 @@ can select an option by entering its corresponding number.
 - View all assignments, deadlines, and completion statuses.
 - Exit the program.
 - Mark assignments as completed.
+- Record actual study hours across multiple study sessions.
 
 ### In Development
-- Record actual time spent on assignments.
 - Save and load assignment data using CSV files.
 - Calculate and display assignment completion rates.
 
@@ -90,7 +92,7 @@ not persist after the program exits.
 - [x] Implement assignment creation with input validation
 - [x] Display assignments and their due dates
 - [x] Allow users to mark assignments as completed
-- [ ] Allow users to record actual time spent on assignments
+- [x] Allow users to record actual time spent on assignments
 - [ ] Save assignment data to CSV file
 - [ ] Load assignments from CSV file on program start
 
@@ -99,7 +101,7 @@ not persist after the program exits.
 - [ ] Filter assignments by course or completion status
 - [ ] Display weekly or class-specific productivity trends
 - [ ] Display productivity using graphs and charts
-- [ ] Develop a graphical user ok interface
+- [ ] Develop a graphical user interface
 
 
 ## Author
