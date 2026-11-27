@@ -3,21 +3,39 @@ import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * A terminal-based user interface for the Study Productivity Tracker. Allows users to manage
+ * assignments, record study hours, and view their productivity statistics.
+ * <p>
+ * Handles user input and delegates assignment operations to the AssignmentManager class.
+ * <p>
+ * Purdue University -- CS19300 -- Fall 2026 -- Final Project -- Student Productivity Tracker
+ *
+ * @author Kim Eagle
+ * @version 1.0
+ */
 public class Main {
 
-     void main() {
+    /**
+     * Starts the program, loads saved assignments, displays the interactive
+     * menu until the user saves and exits.
+     */
+    void main() {
 
-         Scanner scanner = new Scanner(System.in);
-         AssignmentManager manager = new AssignmentManager();
+        Scanner scanner = new Scanner(System.in);
+        AssignmentManager manager = new AssignmentManager();
 
-         if (!manager.loadAssignments()) {
-             IO.println("Program stopped to protect existing saved data.");
-             scanner.close();
-             return;
-         }
+        // Stop the program if loading fails to prevent existing data from being
+        // overwritten by accident
+        if (!manager.loadAssignments()) {
+            IO.println("Program stopped to protect existing saved data.");
+            scanner.close();
+            return;
+        }
 
-         boolean running = true;
+        boolean running = true;
 
+        // Keep the menu available to the user until they save and exit the program
         while (running) {
 
             IO.println("\n YOUR STUDENT PRODUCTIVITY TRACKER");
@@ -32,6 +50,7 @@ public class Main {
             IO.print("Enter your choice: ");
             String choice = scanner.nextLine();
 
+            // Directing the user to the appropriate section based on their choice of menu option
             switch (choice) {
 
                 case "1":
@@ -48,6 +67,7 @@ public class Main {
                         IO.print("Enter estimated hours: ");
                         double estimatedHours = Double.parseDouble(scanner.nextLine());
 
+                        // Validating assignment information before creating an Assignment
                         if (name.isBlank() || course.isBlank()) {
                             IO.println("Name and course cannot be empty.");
                         } else if (!Double.isFinite(estimatedHours) || estimatedHours <= 0) {
@@ -63,6 +83,7 @@ public class Main {
                             IO.println("Total assignments: " + manager.getAssignmentCount());
                         }
 
+                        // Handling invalid input without crashing the program
                     } catch (DateTimeParseException e) {
                         IO.println("Invalid date. Please use YYYY-MM-DD.");
                     } catch (NumberFormatException e) {
@@ -78,6 +99,7 @@ public class Main {
 
 
                 case "3":
+                    // Making sure to not ask the user to select an assignment if none exist
                     if (manager.getAssignmentCount() == 0) {
                         IO.println("No assignments are available to complete.");
                         break;
@@ -97,7 +119,6 @@ public class Main {
                     break;
 
 
-
                 case "4":
                     if (manager.getAssignmentCount() == 0) {
                         IO.println("No assignments are available to record hours for.");
@@ -110,6 +131,7 @@ public class Main {
                         IO.print("\nEnter assignment number: ");
                         int assignmentNumber = Integer.parseInt(scanner.nextLine());
 
+                        // Validating the assignment number before asking for study hours
                         if (assignmentNumber < 1 ||
                                 assignmentNumber > manager.getAssignmentCount()) {
                             IO.println("Invalid assignment number.");
@@ -144,6 +166,7 @@ public class Main {
                             break;
                         }
 
+                        // Requiring confirmation to prevent users from accidentally deleting assignments
                         IO.print("Are you sure you want to delete this assignment? (y/n): ");
                         String confirmation = scanner.nextLine().trim();
 
@@ -164,6 +187,7 @@ public class Main {
                     break;
 
                 case "7":
+                    // Only exiting if the saving succeeds so the user may try again if there is an error
                     if (manager.saveAssignments()) {
                         IO.println("Goodbye!");
                         running = false;
