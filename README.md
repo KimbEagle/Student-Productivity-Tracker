@@ -15,7 +15,8 @@ For students, it becomes difficult to keep track of assignments and time managem
 - Users can record actual study hours across multiple study sessions for each assignment.
 - After each action, users return to the main menu to select another option.
 - Choosing Save and Exit saves all assignments to a local CSV file and then closes the program.
-- Loadin previously saved assignments is a planned feature.
+- Previously existing or entered assignments are now loaded from a local CSV file on program start.
+- Users can delete unwanted or canceled assignments after confirming their selection.
 
 ![System diagram](docs/System-Diagram.png)
 
@@ -76,6 +77,7 @@ can select an option by entering its corresponding number.
 - Record actual study hours across multiple study sessions.
 - Save assignment information to a local CSV file.
 - Automatically load previously saved assignments when the program starts.
+- Delete assignments with confirmation.
 
 ### In Development
 - Load previously saved assignments from a CSV file.
@@ -98,6 +100,9 @@ updated information when the user selected Save and Exit.
 - [x] Allow users to record actual time spent on assignments
 - [x] Save assignment data to CSV file
 - [x] Load assignments from CSV file on program start
+
+### Additional Improvements
+- [x] Delete unwanted or canceled assignments
 
 ### Schedule Features
 - [ ] Calculate and display basic productivity statistics

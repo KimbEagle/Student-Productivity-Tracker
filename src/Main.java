@@ -7,13 +7,16 @@ public class Main {
 
      void main() {
 
-        Scanner scanner = new Scanner(System.in);
-        AssignmentManager manager = new AssignmentManager();
-        if (!manager.loadAssignments()) {
-            IO.println("Program stopped to protect existing saved data.");
-            return;
-        }
-        boolean running = true;
+         Scanner scanner = new Scanner(System.in);
+         AssignmentManager manager = new AssignmentManager();
+
+         if (!manager.loadAssignments()) {
+             IO.println("Program stopped to protect existing saved data.");
+             scanner.close();
+             return;
+         }
+
+         boolean running = true;
 
         while (running) {
 
@@ -22,7 +25,8 @@ public class Main {
             IO.println("2. View Assignments");
             IO.println("3. Mark Assignment Complete");
             IO.println("4. Record Study Hours");
-            IO.println("5. Save and Exit");
+            IO.println("5. Delete Assignment");
+            IO.println("6. Save and Exit");
 
             IO.print("Enter your choice: ");
             String choice = scanner.nextLine();
@@ -121,8 +125,40 @@ public class Main {
 
                     break;
 
-
                 case "5":
+                    if (manager.getAssignmentCount() == 0) {
+                        IO.println("No assignments to delete.");
+                        break;
+                    }
+
+                    manager.viewAssignments();
+
+                    try {
+                        IO.print("Enter assignment number to delete: ");
+                        int assignmentNumber = Integer.parseInt(scanner.nextLine());
+
+                        if (assignmentNumber < 1
+                                || assignmentNumber > manager.getAssignmentCount()) {
+                            IO.println("Invalid assignment number.");
+                            break;
+                        }
+
+                        IO.print("Are you sure you want to delete this assignment? (y/n): ");
+                        String confirmation = scanner.nextLine().trim();
+
+                        if (confirmation.equalsIgnoreCase("y")) {
+                            manager.deleteAssignment(assignmentNumber);
+                        } else {
+                            IO.println("Deletion canceled.");
+                        }
+
+                    } catch (NumberFormatException e) {
+                        IO.println("Please enter a valid assignment number.");
+                    }
+
+                    break;
+
+                case "6":
                     if (manager.saveAssignments()) {
                         IO.println("Goodbye!");
                         running = false;
