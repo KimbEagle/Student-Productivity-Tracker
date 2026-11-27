@@ -26,7 +26,8 @@ public class Main {
             IO.println("3. Mark Assignment Complete");
             IO.println("4. Record Study Hours");
             IO.println("5. Delete Assignment");
-            IO.println("6. Save and Exit");
+            IO.println("6. View Productivity Statistics");
+            IO.println("7. Save and Exit");
 
             IO.print("Enter your choice: ");
             String choice = scanner.nextLine();
@@ -159,6 +160,10 @@ public class Main {
                     break;
 
                 case "6":
+                    manager.viewProductivityStatistics();
+                    break;
+
+                case "7":
                     if (manager.saveAssignments()) {
                         IO.println("Goodbye!");
                         running = false;
