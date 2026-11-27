@@ -119,8 +119,10 @@ public class Main {
 
 
                 case "5":
-                    System.out.println("See you next time!");
-                    running = false;
+                    if (manager.saveAssignments()) {
+                        System.out.println("Goodbye!");
+                        running = false;
+                    }
                     break;
 
                 default:
