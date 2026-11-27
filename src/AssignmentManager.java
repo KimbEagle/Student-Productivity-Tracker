@@ -3,6 +3,9 @@ import java.util.ArrayList;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.time.LocalDate;
 
 public class AssignmentManager {
 
@@ -19,25 +22,25 @@ public class AssignmentManager {
 
     public void viewAssignments() {
         if (assignments.isEmpty()) {
-            System.out.println("No assignments have been added yet.");
+            IO.println("No assignments have been added yet.");
             return;
         }
 
-        System.out.println("\n YOUR ASSIGNMENTS ");
+        IO.println("\n YOUR ASSIGNMENTS ");
 
         // Display numbers start at one so users can
         // identify and select assignments later on
         for (int i = 0; i < assignments.size(); i++) {
-            System.out.println("\nAssignment #" + (i + 1));
-            System.out.println(assignments.get(i));
+            IO.println("\nAssignment #" + (i + 1));
+            IO.println(assignments.get(i));
         }
 
-        System.out.println("\nTotal assignments: " + assignments.size());
+        IO.println("\nTotal assignments: " + assignments.size());
     }
 
     public void completeAssignment(int assignmentNumber) {
         if (assignmentNumber < 1 || assignmentNumber > assignments.size()) {
-            System.out.println("Invalid assignment number.");
+            IO.println("Invalid assignment number.");
             return;
         }
 
@@ -45,35 +48,35 @@ public class AssignmentManager {
         Assignment assignment = assignments.get(assignmentNumber - 1);
 
         if (assignment.isCompleted()) {
-            System.out.println("This assignment is already completed.");
+            IO.println("This assignment is already completed.");
             return;
         }
 
         assignment.markComplete();
-        System.out.println("Assignment marked as completed successfully!");
+        IO.println("Assignment marked as completed successfully!");
     }
 
     public void recordStudyHours(int assignmentNumber, double hours) {
         if (assignmentNumber < 1 || assignmentNumber > assignments.size()) {
-            System.out.println("Invalid assignment number.");
+            IO.println("Invalid assignment number.");
             return;
         }
 
         if (!Double.isFinite(hours) || hours <= 0) {
-            System.out.println("Study hours must be a positive number.");
+            IO.println("Study hours must be a positive number.");
             return;
         }
 
         Assignment assignment = assignments.get(assignmentNumber - 1);
 
         if (!Double.isFinite(assignment.getActualHours() + hours)) {
-            System.out.println("Total study hours are too large.");
+            IO.println("Total study hours are too large.");
             return;
         }
 
         assignment.addActualHours(hours);
-        System.out.println("Study hours recorded successfully!");
-        System.out.println("Total actual hours: " + assignment.getActualHours());
+        IO.println("Study hours recorded successfully!");
+        IO.println("Total actual hours: " + assignment.getActualHours());
     }
 
 
@@ -98,18 +101,122 @@ public class AssignmentManager {
             }
 
         } catch (IOException e) {
-            System.out.println("Error saving assignments: " + e.getMessage());
+            IO.println("Error saving assignments: " + e.getMessage());
             return false;
         }
 
-        System.out.println("Assignments saved successfully!");
+        IO.println("Assignments saved successfully!");
         return true;
     }
+
+    public boolean loadAssignments() {
+        ArrayList<Assignment> loadedAssignments = new ArrayList<>();
+
+        if (java.nio.file.Files.notExists(java.nio.file.Path.of(FILE_NAME))) {
+            return true;
+        }
+
+        try (BufferedReader reader = new BufferedReader(
+                new FileReader(FILE_NAME))) {
+
+            String header = reader.readLine();
+
+            if (!"Name,Course,DueDate,EstimatedHours,ActualHours,Completed"
+                    .equals(header)) {
+                throw new IllegalArgumentException("Invalid CSV header.");
+            }
+
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                ArrayList<String> values = parseCSVLine(line);
+
+                if (values.size() != 6) {
+                    throw new IllegalArgumentException("Invalid assignment data.");
+                }
+
+                String name = values.get(0);
+                String course = values.get(1);
+                LocalDate dueDate = LocalDate.parse(values.get(2));
+                double estimatedHours = Double.parseDouble(values.get(3));
+                double actualHours = Double.parseDouble(values.get(4));
+                String completed = values.get(5);
+
+                if (name.isBlank() || course.isBlank()
+                        || !Double.isFinite(estimatedHours)
+                        || estimatedHours <= 0
+                        || !Double.isFinite(actualHours)
+                        || actualHours < 0
+                        || (!completed.equals("true")
+                        && !completed.equals("false"))) {
+                    throw new IllegalArgumentException("Invalid assignment values.");
+                }
+
+                Assignment assignment = new Assignment(
+                        name, course, dueDate, estimatedHours);
+
+                assignment.addActualHours(actualHours);
+
+                if (completed.equals("true")) {
+                    assignment.markComplete();
+                }
+
+                loadedAssignments.add(assignment);
+            }
+
+        } catch (IOException | IllegalArgumentException
+                 | java.time.format.DateTimeParseException e) {
+            IO.println("Error loading assignments: " + e.getMessage());
+            return false;
+        }
+
+        // Replace existing data only after the entire file loads successfully.
+        assignments.clear();
+        assignments.addAll(loadedAssignments);
+
+        IO.println("Assignments loaded successfully!");
+        IO.println("Total assignments: " + assignments.size());
+        return true;
+    }
+
 
 
     private String escapeCSV(String value) {
         return "\"" + value.replace("\"", "\"\"") + "\"";
     }
+
+    private ArrayList<String> parseCSVLine(String line) {
+        ArrayList<String> values = new ArrayList<>();
+        StringBuilder currentValue = new StringBuilder();
+        boolean insideQuotes = false;
+
+        for (int i = 0; i < line.length(); i++) {
+            char character = line.charAt(i);
+
+            if (character == '"') {
+                if (insideQuotes && i + 1 < line.length()
+                        && line.charAt(i + 1) == '"') {
+                    currentValue.append('"');
+                    i++;
+                } else {
+                    insideQuotes = !insideQuotes;
+                }
+            } else if (character == ',' && !insideQuotes) {
+                values.add(currentValue.toString());
+                currentValue.setLength(0);
+            } else {
+                currentValue.append(character);
+            }
+        }
+
+        if (insideQuotes) {
+            throw new IllegalArgumentException("Unclosed CSV quotation marks.");
+        }
+
+        values.add(currentValue.toString());
+        return values;
+    }
+
 
 
 }
