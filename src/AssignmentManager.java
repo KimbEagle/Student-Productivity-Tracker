@@ -90,6 +90,46 @@ public class AssignmentManager {
         IO.println(assignment.getName() + " deleted successfully!");
     }
 
+    public void viewProductivityStatistics() {
+        // Preventing division by zero when calculating completion percentage.
+        if (assignments.isEmpty()) {
+            IO.println("No assignments available to calculate statistics.");
+            return;
+        }
+
+        int totalAssignments = assignments.size();
+        int completedAssignments = 0;
+        double totalEstimatedHours = 0.0;
+        double totalActualHours = 0.0;
+
+        // Calculate statistics using current assignment data so results
+        // reflect any changes made by the user.
+        for (Assignment assignment : assignments) {
+            if (assignment.isCompleted()) {
+                completedAssignments++;
+            }
+
+            totalEstimatedHours += assignment.getEstimatedHours();
+            totalActualHours += assignment.getActualHours();
+        }
+
+        int incompleteAssignments = totalAssignments - completedAssignments;
+
+        // Casting to a double to avoid truncating the result through integer division
+        double completionPercentage =
+                (double) completedAssignments / totalAssignments * 100;
+
+        IO.println("\nPRODUCTIVITY STATISTICS");
+        IO.println("Total assignments: " + totalAssignments);
+        IO.println("Completed assignments: " + completedAssignments);
+        IO.println("Incomplete assignments: " + incompleteAssignments);
+        IO.println("Completion percentage: "
+                + String.format("%.1f", completionPercentage) + "%");
+        IO.println("Total estimated hours: "
+                + String.format("%.2f", totalEstimatedHours));
+        IO.println("Total actual hours: "
+                + String.format("%.2f", totalActualHours));
+    }
 
 
     public boolean saveAssignments() {

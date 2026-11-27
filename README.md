@@ -17,6 +17,8 @@ For students, it becomes difficult to keep track of assignments and time managem
 - Choosing Save and Exit saves all assignments to a local CSV file and then closes the program.
 - Previously existing or entered assignments are now loaded from a local CSV file on program start.
 - Users can delete unwanted or canceled assignments after confirming their selection.
+- Users can view their productivity statistics, including assignment completion percentage and
+- estimated hours versus total hours studied.
 
 ![System diagram](docs/System-Diagram.png)
 
@@ -78,10 +80,9 @@ can select an option by entering its corresponding number.
 - Save assignment information to a local CSV file.
 - Automatically load previously saved assignments when the program starts.
 - Delete assignments with confirmation.
+- Calculate and display basic productivity statistics.
 
 ### In Development
-- Load previously saved assignments from a CSV file.
-- Calculate and display assignment completion rates.
 
 Assignment data is stored locally in assignments.csv.
 The program automatically loads saved assignments on startup and saves
@@ -105,7 +106,7 @@ updated information when the user selected Save and Exit.
 - [x] Delete unwanted or canceled assignments
 
 ### Schedule Features
-- [ ] Calculate and display basic productivity statistics
+- [x] Calculate and display basic productivity statistics
 - [ ] Filter assignments by course or completion status
 - [ ] Display weekly or class-specific productivity trends
 - [ ] Display productivity using graphs and charts
