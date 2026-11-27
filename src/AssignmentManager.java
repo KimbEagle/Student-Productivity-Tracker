@@ -79,6 +79,18 @@ public class AssignmentManager {
         IO.println("Total actual hours: " + assignment.getActualHours());
     }
 
+    public void deleteAssignment(int assignmentNumber) {
+        if (assignmentNumber < 1 || assignmentNumber > assignments.size()) {
+            IO.println("Invalid assignment number.");
+            return;
+        }
+
+        Assignment assignment = assignments.remove(assignmentNumber - 1);
+
+        IO.println(assignment.getName() + " deleted successfully!");
+    }
+
+
 
     public boolean saveAssignments() {
         try (BufferedWriter writer = new BufferedWriter(
