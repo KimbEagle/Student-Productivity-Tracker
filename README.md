@@ -75,14 +75,15 @@ can select an option by entering its corresponding number.
 - Mark assignments as completed.
 - Record actual study hours across multiple study sessions.
 - Save assignment information to a local CSV file.
+- Automatically load previously saved assignments when the program starts.
 
 ### In Development
 - Load previously saved assignments from a CSV file.
 - Calculate and display assignment completion rates.
 
-Assignment data is saved to assignments.csv when the user chooses the Save and Exit option in the main menu. 
-Automatic loading is not yet implemented, so saving in a new section will overwrite previous data.
-
+Assignment data is stored locally in assignments.csv.
+The program automatically loads saved assignments on startup and saves
+updated information when the user selected Save and Exit.
 
 
 ## Roadmap
@@ -96,7 +97,7 @@ Automatic loading is not yet implemented, so saving in a new section will overwr
 - [x] Allow users to mark assignments as completed
 - [x] Allow users to record actual time spent on assignments
 - [x] Save assignment data to CSV file
-- [ ] Load assignments from CSV file on program start
+- [x] Load assignments from CSV file on program start
 
 ### Schedule Features
 - [ ] Calculate and display basic productivity statistics
