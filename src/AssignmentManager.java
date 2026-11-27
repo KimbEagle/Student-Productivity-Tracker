@@ -1,9 +1,13 @@
 
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.IOException;
 
 public class AssignmentManager {
 
     private final ArrayList<Assignment> assignments = new ArrayList<>();
+    private static final String FILE_NAME = "assignments.csv";
 
     public void addAssignment(Assignment assignment) {
         assignments.add(assignment);
@@ -70,6 +74,41 @@ public class AssignmentManager {
         assignment.addActualHours(hours);
         System.out.println("Study hours recorded successfully!");
         System.out.println("Total actual hours: " + assignment.getActualHours());
+    }
+
+
+    public boolean saveAssignments() {
+        try (BufferedWriter writer = new BufferedWriter(
+                new FileWriter(FILE_NAME))) {
+
+            writer.write("Name,Course,DueDate,EstimatedHours,ActualHours,Completed");
+            writer.newLine();
+
+            for (Assignment assignment : assignments) {
+                writer.write(
+                        escapeCSV(assignment.getName()) + "," +
+                                escapeCSV(assignment.getCourse()) + "," +
+                                assignment.getDueDate() + "," +
+                                assignment.getEstimatedHours() + "," +
+                                assignment.getActualHours() + "," +
+                                assignment.isCompleted()
+                );
+
+                writer.newLine();
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error saving assignments: " + e.getMessage());
+            return false;
+        }
+
+        System.out.println("Assignments saved successfully!");
+        return true;
+    }
+
+
+    private String escapeCSV(String value) {
+        return "\"" + value.replace("\"", "\"\"") + "\"";
     }
 
 

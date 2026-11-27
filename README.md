@@ -14,15 +14,16 @@ For students, it becomes difficult to keep track of assignments and time managem
 - Users can mark unfinished assignments as completed.
 - Users can record actual study hours across multiple study sessions for each assignment.
 - After each action, users return to the main menu to select another option.
-- Assignment data is currently stored in memory. CSV storage and productivity statistics are planned features.
+- Choosing Save and Exit saves all assignments to a local CSV file and then closes the program.
+- Loadin previously saved assignments is a planned feature.
 
 ![System diagram](docs/System-Diagram.png)
 
 ## Tech Stack
 
 - **Language:** Java 26
-- **Libraries:** ArrayList, LocalDate, Scanner
-- **Storage:** In-memory ArrayList (CSV file storage planned)
+- **Libraries:** ArrayList, LocalDate, Scanner, Java IO
+- **Storage:** In-memory ArrayList and local CSV file
 - **Development tools:** IntelliJ IDEA, Git, GitHub
 - **External dependencies:** None
 
@@ -73,13 +74,14 @@ can select an option by entering its corresponding number.
 - Exit the program.
 - Mark assignments as completed.
 - Record actual study hours across multiple study sessions.
+- Save assignment information to a local CSV file.
 
 ### In Development
-- Save and load assignment data using CSV files.
+- Load previously saved assignments from a CSV file.
 - Calculate and display assignment completion rates.
 
-Assignment data is currently stored in memory and will
-not persist after the program exits.
+Assignment data is saved to assignments.csv when the user chooses the Save and Exit option in the main menu. 
+Automatic loading is not yet implemented, so saving in a new section will overwrite previous data.
 
 
 
@@ -93,7 +95,7 @@ not persist after the program exits.
 - [x] Display assignments and their due dates
 - [x] Allow users to mark assignments as completed
 - [x] Allow users to record actual time spent on assignments
-- [ ] Save assignment data to CSV file
+- [x] Save assignment data to CSV file
 - [ ] Load assignments from CSV file on program start
 
 ### Schedule Features
